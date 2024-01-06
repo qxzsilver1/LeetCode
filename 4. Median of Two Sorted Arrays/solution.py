@@ -6,28 +6,40 @@ class Solution:
         m = len(nums1)
         n = len(nums2)
         
-        start = 0
-        end = m
+        if m > n:
+            return self.findMedianSortedArrays(nums2, nums1)
         
-        while start <= end:
-            partition_nums1 = (start + end) // 2
-            partition_nums2 = (m + n + 1) // 2 - partition_nums1
+        n_total = m + n
+        left_partition_size = (n_total + 1) // 2
+        lo = 0
+        hi = m
+
+        while lo <= hi:
+            mid_1 = (lo + hi) // 2
+            mid_2 = left_partition_size - mid_1
+
+            l1 = float('-inf')
+            l2 = float('-inf')
+            r1 = float('inf')
+            r2 = float('inf')
+
+            if mid_1 < m:
+                r1 = nums1[mid_1]
+            if mid_2 < n:
+                r2 = nums2[mid_2]
+            if mid_1 - 1 >= 0:
+                l1 = nums1[mid_1 - 1]
+            if mid_2 - 1 >= 0:
+                l2 = nums2[mid_2 - 1]
             
-            max_L_nums1 = nums1[partition_nums1 - 1] if partition_nums1 > 0 else -sys.maxsize
-            min_R_nums1 = nums1[partition_nums1] if partition_nums1 < m else sys.maxsize
-            
-            max_L_nums2 = nums2[partition_nums2 - 1] if partition_nums2 > 0 else -sys.maxsize
-            min_R_nums2 = nums2[partition_nums2] if partition_nums2 < n else sys.maxsize
-            
-            if (max_L_nums1 <= min_R_nums2) and (max_L_nums2 <= min_R_nums1):
-                
-                if (m+n) % 2 == 0:
-                    return (max(max_L_nums1, max_L_nums2) + min(min_R_nums1, min_R_nums2)) / 2
+            if l1 <= r2 and l2 <= r1:
+                if n_total % 2 == 1:
+                    return max(l1, l2)
                 else:
-                    return max(max_L_nums1, max_L_nums2)
-            elif max_L_nums1 > min_R_nums2:
-                end = partition_nums1 - 1
+                    return (max(l1, l2) + min(r1, r2)) / 2.0
+            elif l1 > r2:
+                hi = mid_1 - 1
             else:
-                start = partition_nums1 + 1
+                lo = mid_1 + 1
         
         return -1
