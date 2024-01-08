@@ -21,4 +21,4 @@ class Solution:
                 t = int(a / b)
             stack.append(int(t))
         
-        return int(stack.pop())
+        return stack.pop()
