@@ -3,20 +3,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        color_dict = {0: 0, 1: 0, 2: 0}
+        l, r = 0, len(nums) - 1
+        i = 0
 
-        for n in nums:
-            color_dict[n] += 1
-        
-        for i in range(len(nums)):
-            if color_dict[0] > 0:
-                nums[i] = 0
-                color_dict[0] -= 1
-            elif color_dict[1] > 0:
-                nums[i] = 1
-                color_dict[1] -= 1
-            else:
-                nums[i] = 2
-                color_dict[2] -= 1
-        
-        return nums
+        def swap(i, j):
+            tmp = nums[i]
+            nums[i] = nums[j]
+            nums[j] = tmp
+
+        while i <= r:
+            if nums[i] == 0:
+                swap(l, i)
+                l += 1
+            elif nums[i] == 2:
+                swap(i, r)
+                r -= 1
+                i -= 1
+            
+            i += 1
