@@ -20,5 +20,3 @@ class Solution:
                 color_dict[2] -= 1
         
         return nums
-
-        
