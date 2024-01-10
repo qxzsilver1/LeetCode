@@ -1,28 +1,35 @@
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.prefix_sum_arr = []
-        curr_sum = 0
+        self.n = len(nums)
+        self.nums = nums
+        self.binary_indexed_tree = [0] + nums[:]
 
-        for n in nums:
-            curr_sum += n
-            self.prefix_sum_arr.append(curr_sum)
+        for i in range(1, self.n + 1):
+            j = i + (i & -i)
+            if j <= self.n:
+                self.binary_indexed_tree[j] += self.binary_indexed_tree[i]
 
     def update(self, index: int, val: int) -> None:
-        if index == 0:
-            val_delta = val - self.prefix_sum_arr[index]
-            for i in range(len(self.prefix_sum_arr)):
-                self.prefix_sum_arr[i] += val_delta
-        else:
-            val_delta = val - (self.prefix_sum_arr[index] - self.prefix_sum_arr[index-1])
-            for i in range(index, len(self.prefix_sum_arr)):
-                self.prefix_sum_arr[i] += val_delta
+        val_delta = val - self.nums[index]
+        self.nums[index] = val
+        index += 1
+        while index <= self.n:
+            self.binary_indexed_tree[index] += val_delta
+            index += (index & -index)
 
     def sumRange(self, left: int, right: int) -> int:
-        r_sum = self.prefix_sum_arr[right]
-        l_sum = self.prefix_sum_arr[left - 1] if left > 0 else 0
+        return self.getPrefix(right) - self.getPrefix(left-1)
+    
+    def getPrefix(self, i: int) -> int:
+        i += 1
+        res = 0
 
-        return r_sum - l_sum
+        while i > 0:
+            res += self.binary_indexed_tree[i]
+            i -= (i & -i)
+
+        return res
 
 
 
