@@ -1,9 +1,19 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        n = len(nums) - 1
-        sum_tot = n * (n+1) // 2
+        slow, fast = 0, 0
 
-        for n in nums:
-            sum_tot -= n
-        
-        return -sum_tot
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+
+            if fast == slow:
+                break
+
+        slow2 = 0
+
+        while True:
+            slow = nums[slow]
+            slow2 = nums[slow2]
+
+            if slow == slow2:
+                return slow
