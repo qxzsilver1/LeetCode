@@ -3,7 +3,7 @@ class Solution:
         bit_count = 0
 
         while n:
-            n = n & (n-1)
+            n &= (n-1)
             bit_count += 1
         
         return bit_count
