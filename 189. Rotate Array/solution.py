@@ -3,9 +3,10 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        k = k % len(nums)
+        n = len(nums)
+        k %= n
 
-        l, r = 0, len(nums) - 1
+        l, r = 0, n - 1
 
         def reverse_list(left, right):
             while left < right:
@@ -15,6 +16,6 @@ class Solution:
 
         reverse_list(l, r)
         reverse_list(0, k-1)
-        reverse_list(k, len(nums) - 1)
+        reverse_list(k, n - 1)
 
         return nums
