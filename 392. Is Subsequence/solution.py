@@ -6,6 +6,9 @@ class Solution:
             if s[i] == t[j]:
                 i += 1
             
+            if i == len(s):
+                return True
+            
             j += 1
         
         return False if i < len(s) else True
