@@ -12,4 +12,4 @@ class Solution:
             else:
                 l = m + 1
         
-        return m + 1 if target > nums[m] else m
+        return l
