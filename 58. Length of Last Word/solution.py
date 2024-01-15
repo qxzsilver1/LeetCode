@@ -7,10 +7,8 @@ class Solution:
         while s[r] == ' ':
             r -= 1
 
-        for i in range(r, -1, -1):
-            if s[i] == ' ':
-                break
-            
+        while r >= 0 and s[r] != ' ':
             length_last += 1
+            r -= 1
         
         return length_last
