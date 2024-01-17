@@ -1,5 +1,6 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
+        # create the 128-character ASCII mapping arrays from s->t and t->s (since all input will be ASCII table characters from ord(x) ranging from 0 to 127, inclusive
         s_to_t = [-1] * 128
         t_to_s = [-1] * 128
         n = len(s)
