@@ -3,14 +3,17 @@ class Solution:
         nums1_to_idx = { n: i for i, n in enumerate(nums1) }
         res = [-1] * len(nums1)
 
+        stack = []
+
         for i in range(len(nums2)):
-            if nums2[i] not in nums1_to_idx:
-                continue
+            curr = nums2[i]
+
+            while stack and curr > stack[-1]:
+                val = stack.pop()
+                idx = nums1_to_idx[val]
+                res[idx] = curr
             
-            for j in range(i + 1, len(nums2)):
-                if nums2[j] > nums2[i]:
-                    idx = nums1_to_idx[nums2[i]]
-                    res[idx] = nums2[j]
-                    break
-        
+            if curr in nums1_to_idx:
+                stack.append(curr)
+
         return res
