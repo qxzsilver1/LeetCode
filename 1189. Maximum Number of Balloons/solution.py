@@ -1,6 +1,5 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
-        balloon = 'ablno'
         balloon_ablno_count = [1, 1, 2, 1, 2]
         text_ablno_count = [0, 0, 0, 0, 0]
 
@@ -21,7 +20,7 @@ class Solution:
         for t in text:
             balloon_counter(t)
         
-        for i in range(len(balloon)):
+        for i in range(len(balloon_ablno_count)):
             res = min(res, text_ablno_count[i] // balloon_ablno_count[i])
 
         return res
