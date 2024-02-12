@@ -9,29 +9,37 @@ class Solution:
 
         output = []
 
-        def insert(node, val):
+        root = TreeNode()
+
+        def insert(val): 
+            nonlocal root 
+            root = insertRecur(root, val) 
+
+        def insertRecur(node, val):
             if not node:
                 return TreeNode(val)
             
             if val <= node.val:
-                node.left = insert(node.left, val)
+                node.left = insertRecur(node.left, val)
             else:
-                node.right = insert(node.right, val)
+                node.right = insertRecur(node.right, val)
             
             return node
-        
-        root = TreeNode(nums[0])
 
-        for i in range(1, len(nums)):
-            insert(root, nums[i])
+        for i in range(len(nums)):
+            insert(nums[i])
         
-        def inorder(root):
-            if not root:
+        def inorder(node):
+            if not node:
                 return
             
-            inorder(root.left)
-            output.append(root.val)
-            inorder(root.right)
+            if node == root:
+                inorder(node.left)
+                inorder(node.right)
+            else:
+                inorder(node.left)
+                output.append(node.val)
+                inorder(node.right)
         
         inorder(root)
 
