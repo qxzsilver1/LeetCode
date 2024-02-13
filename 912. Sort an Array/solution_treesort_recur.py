@@ -1,3 +1,5 @@
+import random
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -6,6 +8,14 @@ class TreeNode:
 
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
+
+        # Fisher-Yates shuffle
+        for i in range(len(nums)-1):
+            j = random.randint(i, len(nums)-1)
+
+            tmp = nums[j]
+            nums[j] = nums[i]
+            nums[i] = tmp
 
         output = []
 
