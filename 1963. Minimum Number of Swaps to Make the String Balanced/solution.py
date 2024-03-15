@@ -11,4 +11,4 @@ class Solution:
             
             max_unmatched_closing = max(max_unmatched_closing, extra_closing_brackets)
         
-        return int((max_unmatched_closing + 1) / 2)
+        return (max_unmatched_closing + 1) // 2
