@@ -1,14 +1,14 @@
 class Solution:
     def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
-        avg = sum(arr[0:k]) / k
-        res = 1 if avg >= threshold else 0
+        running_sum = sum(arr[0:k])
+        res = 1 if running_sum >= k * threshold else 0
 
         l = 0
 
         for r in range(k, len(arr)):
-            avg = (avg * k - arr[l] + arr[r]) / k
+            running_sum = running_sum - arr[l] + arr[r]
             
-            if avg >= threshold:
+            if running_sum >= k * threshold:
                 res += 1
             
             l += 1
