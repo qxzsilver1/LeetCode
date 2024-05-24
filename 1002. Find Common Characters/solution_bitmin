@@ -1,0 +1,23 @@
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        char_boolean = [0] * 26
+        offset = ord('a')
+        res = []
+
+        for i in range(len(words)):
+            curr_word_dict = Counter(words[i])
+
+            for j in range(len(char_boolean)):
+                x = curr_word_dict[chr(offset+j)]
+                if not i:
+                    char_boolean[j] ^= x
+                else:
+                    y = char_boolean[j]
+                    char_boolean[j] = x ^ ((y ^ x) & -(y < x))
+        
+        for i in range(len(char_boolean)):
+            if char_boolean[i]:
+                for j in range(char_boolean[i]):
+                    res.append(chr(offset + i))
+        
+        return res
