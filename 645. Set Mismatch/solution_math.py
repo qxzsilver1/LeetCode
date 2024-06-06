@@ -1,7 +1,5 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        res = [0, 0]
-
         n = len(nums)
 
         x, y = 0, 0
