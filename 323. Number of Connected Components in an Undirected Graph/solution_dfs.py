@@ -18,7 +18,6 @@ class Solution:
 
         for i in range(n):
             if not visited[i]:
-                visited[i] = True
                 dfs(i)
                 res += 1
         
