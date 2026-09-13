@@ -34,5 +34,3 @@ class Solution:
                 l = m + 1
         
         return res
-        
-        return 0
