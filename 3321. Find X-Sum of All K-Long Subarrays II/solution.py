@@ -37,6 +37,7 @@ class Helper:
         if p >= self.large[0]:
             self.result -= p[0] * p[1]
             self.large.remove(p)
+            
             if self.small:
                 to_add = self.small[-1]
                 self.result += to_add[0] * to_add[1]
