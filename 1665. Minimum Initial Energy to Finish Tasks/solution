@@ -1,0 +1,10 @@
+class Solution:
+    def minimumEffort(self, tasks: list[list[int]]) -> int:
+        tasks.sort(key= lambda x: x[1] - x[0])
+
+        res = 0
+
+        for task in tasks:
+            res = max(res + task[0], task[1])
+        
+        return res
